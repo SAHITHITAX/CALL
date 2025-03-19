@@ -120,7 +120,7 @@ async function fetchData() {
             let whatsappClientLink = '#';
             let clientDisabledAttr = 'disabled';
             if (phone.length >= 10) {
-                const message = encodeURIComponent(`Hi ${name}, Regarding your pending work: ${work}`);
+                const message = encodeURIComponent(`Hi ${name}, Reminder regarding your pending work: ${work}`);
                 whatsappClientLink = `https://wa.me/${phone}?text=${message}`;
                 clientDisabledAttr = '';
             }
@@ -174,7 +174,7 @@ function sendBulkWhatsApp() {
     rows.forEach(row => {
         const phone = row.cells[2].innerText.replace(/\D/g, '');
         if (phone.length >= 10) {
-            phoneNumbers.push(`https://wa.me/${phone}?text=${encodeURIComponent('Reminder: Labour Licence renewal due on 31-Dec to avoid penalties.')}`);
+            phoneNumbers.push(`https://wa.me/${phone}?text=${encodeURIComponent('Hi ${name}, Reminder regarding your pending work: ${work}')}`);
         }
     });
     phoneNumbers.forEach((link, index) => {
