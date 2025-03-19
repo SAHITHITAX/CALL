@@ -52,6 +52,7 @@
 <body>
 
 <h2>CALL To Be</h2>
+    <button class="whatsapp-btn" onclick="sendBulkWhatsApp()">Send WhatsApp to All</button>
 <p id="refreshMessage">Data refreshed successfully.</p>
 <p id="loading">Fetching data, please wait...</p>
 
@@ -166,6 +167,19 @@ async function fetchData() {
     } finally {
         document.getElementById("loading").style.display = "none";
     }
+}
+function sendBulkWhatsApp() {
+    const rows = document.querySelectorAll("#dataTable tbody tr");
+    let phoneNumbers = [];
+    rows.forEach(row => {
+        const phone = row.cells[2].innerText.replace(/\D/g, '');
+        if (phone.length >= 10) {
+            phoneNumbers.push(`https://wa.me/${phone}?text=${encodeURIComponent('Reminder: Labour Licence renewal due on 31-Dec to avoid penalties.')}`);
+        }
+    });
+    phoneNumbers.forEach((link, index) => {
+        setTimeout(() => { window.open(link, '_blank'); }, index * 2000);
+    });
 }
 
 // Fetch data initially and refresh every 60 seconds
